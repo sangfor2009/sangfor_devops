@@ -1,0 +1,9 @@
+hosts: ad-test 
+remote_user: admin tasks:
+tasks:
+    name: create-ssl
+    command: 'sfcli create rc ssl-certificate certificate-request ssl1 type certificate-request public_key_algorithm rsa public_key_length 2048  signature_algorithm sha256 subject { cn 34 c DD ou CC o DASD l DSA st SAD } password admin'
+    name: imported-ssl
+    command: 'sfcli create rc ssl-certificate imported-certificate ssl1 certificate_chains [ { certificate_token "ssl1/server.crt" } { private_key_token "ssl2/server.key" private_key_password 123456 } ] '
+    name: crl-ssl
+    command: 'sfcli create rc crl crl1 url "http://www.baidu.com" timeout 10 interval 21600 retry_times 3 method http '
