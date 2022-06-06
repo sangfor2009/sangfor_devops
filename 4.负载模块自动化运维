@@ -16,3 +16,4 @@
      command: "sfcli delete slb pool pool1"
    - name: "删除监视器"
      command: "sfcli delete slb service-monitor http http1"
+ 
