@@ -1,0 +1,10 @@
+- hosts: all
+  tasks:
+   - name: "新建bond口"
+     command: "sfcli create net bond mybond interfaces add [ { type physical interface NET4 } { type physical interface NET5 } ] aggregate_policy hash mtu 1500 "
+   - name: "新建链路mylan并设置IP地址和网关"
+     command: "sfcli create net link lan mylan state enable interface { interface mybond type bond } addresses ['192.168.1.1/24' '192.168.1.2/24'] monitors [ { monitor ping target_host '192.168.1.254'} ] cable_plugin_detect enable arp_detect { state enable target_host '192.168.1.254' interval 5 timeout 15 }"
+   - name: "新建静态路由"
+     command: "sfcli create net static-route test_route gateway 192.168.1.200 subnet 192.168.200.3/24"
+   - name: "初始化管理口配置"
+     command: "sfcli modify sys management host localhost addresses add [ 10.10.10.1/24 ] gateway 10.10.10.254"
