@@ -1,0 +1,23 @@
+hosts: ad-test 
+remote_user: admin tasks:
+tasks:
+    name: create-A
+    command: 'sfcli create dns dns-record local a a.test.com a_records [ { address 1.1.1.1 ttl 40 } { address 1.1.1.2 ttl 60 }]'
+    name: create-AAAA
+    command: 'sfcli create dns dns-record local aaaa aaaa.test.com aaaa_records [ { address 1::1 ttl 30 } { address 1::2 ttl 60 } ]'
+    name: create-CNAME
+    command: 'sfcli create dns dns-record local cname cname.test.com cname_records [ cn1.test.com cn2.test.com ]'
+    name: create-MX
+    command: 'sfcli create dns dns-record local mx mx.test.com mx_records [ { host mail.test.com priority 10 ttl 70 } { host mail1.test.com priority 20 ttl 80 } ]'
+    name: create-NS
+    command: 'sfcli create dns dns-record local ns test.com ns_records [ { domain ns1.test.com } { domain ns2.test.com address 2.2.2.2} { domain ns3.test.com address 3::3 }]'
+    name: create-ptrv4
+    command: 'sfcli create dns dns-record local ptr 202.96.134.133.in-addr.arpa ptr_records [ { domain test.com ttl 70 } { domain test1.com ttl 80}]'
+    name: create-ptrv6
+    command: 'sfcli create dns dns-record local ptr 1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.3.0.0.0.ip6.arpa ptr_records [ { domain test2.com ttl 10}]'
+    name: create-SOA
+    command: 'sfcli create dns dns-record local soa test.com soa_record { host soa.test.com email a.test.com serial 1000 refresh_interval 5 retry_delay 10 ttl 80 minimum_ttl 5 expire_time 1000}'
+    name: create-SRV
+    command: 'sfcli create dns dns-record local srv test.com srv_records [ { address a.com port 90 priority 30 weight 20 ttl 200} ]'
+    name: create-TXT
+    command: 'sfcli create dns dns-record local txt test.com txt_record vpf=1234567 ttl 30'
