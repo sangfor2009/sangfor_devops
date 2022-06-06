@@ -1,0 +1,8 @@
+- hosts: all
+  tasks:
+   - name: "配置SNMPv1/v2c服务"
+     command: "sfcli create sys snmp snmp_example description snmp_example_config community public state enable permit_source_address { type ip-address addresses [ 1.1.1.1 1::1 2.2.2.0/24 ] }"
+   - name: "配置SNMPv3服务"
+     command: "sfcli create sys snmpv3 snmpv3_example description snmpv3_config_desc state enable username admin privileges get-and-set authentication { state enable algorithm md5 password a1234567 } encrypt { state enable algorithm des password 1234567a reuse_authentication_password disable }"
+   - name: "配置SNMP trap服务"
+     command: "sfcli create sys trap trap_example description trap_example_desc state enable address 192.168.1.1 port 126 version v3 snmpv3 { username admin engine_id 0x010203040506adf authentication { state enable algorithm md5 password a1234567 } encrypt { state enable reuse_authentication_password disable algorithm des password a1234567 } }"
