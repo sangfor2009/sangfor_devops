@@ -21,3 +21,4 @@ tasks:
     command: 'sfcli create dns dns-record local srv test.com srv_records [ { address a.com port 90 priority 30 weight 20 ttl 200} ]'
     name: create-TXT
     command: 'sfcli create dns dns-record local txt test.com txt_record vpf=1234567 ttl 30'
+ 
