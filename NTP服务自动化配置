@@ -1,0 +1,4 @@
+- hosts: all
+  tasks:
+   - name: "配置NTP服务"
+     command: "sfcli modify sys ntp ntp_preferred 1.1.1.1 ntp_alternate 2.2.2.2 interval 5"
