@@ -7,4 +7,4 @@
    - name: "新建静态路由"
      command: "sfcli create net static-route test_route gateway 192.168.1.200 subnet 192.168.200.3/24"
    - name: "初始化管理口配置"
-     command: "sfcli modify sys management host localhost addresses add [ 10.10.10.1/24 ] gateway 10.10.10.254"
+     command: "sfcli modify sys management host localhost addresses add [ 10.10.10.1/24 ] gateway 10.10.10.254" 
