@@ -1,0 +1,18 @@
+- hosts: all
+  tasks:
+   - name: "新建监视器"
+     command: "sfcli create slb service-monitor http http1  host '*' port 0 http_request_url /index.html expect_status_code 302"
+   - name: "新建Pool"
+     command: "sfcli create slb pool pool1  method round-robin priority_level_available_node 1 nodes add [ { type domain address www.test.com cookie 12312312 port 90 state offline priority_level 10 weight 10 } {type address address 3.3.3.3 port 80 }] persist sourceip service_monitors [ http1 ]"
+   - name: "新建虚拟服务器vs"
+     command: "sfcli create slb virtual-service MyVS vips [ 1.1.1.1 2.2.2.2 ] vports [ 80 90-91 ] pool pool1 service http"
+   - name: "修改Pool"
+     command: "sfcli modify slb pool pool1 service_monitors add [ ping ]"
+   - name: "修改VS"
+     command: "sfcli modify slb virtual-service MyVS vips add [ 1::1 ] vports add [ 93 ] snat auto-map"
+   - name: "删除VS"
+     command: "sfcli delete slb virtual-service MyVS"
+   - name: "删除Pool"
+     command: "sfcli delete slb pool pool1"
+   - name: "删除监视器"
+     command: "sfcli delete slb service-monitor http http1"
